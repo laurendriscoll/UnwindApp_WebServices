@@ -19,14 +19,14 @@ $data = json_decode(file_get_contents("php://input"));
 $request = new Request();
 $request->data = $data;
 if (method_exists($controller, $method)) {
-    if (!($controller == "UsersController" && $method == "post")){
-        $user = authenticate($username,$password);
-        if (user == null) {
-            http_response_code(401);
-            die();
-        }
-        
-    }
+//    if (!($controller == "UsersController" && $method == "post")){
+//        $user = authenticate($username,$password);
+//        if (user == null) {
+//            http_response_code(401);
+//            die();
+//        }
+//
+//    }
     if ($method == "get" || $method == "put" || $method == "delete") {
         $request->id = $path[2];
     }

@@ -16,4 +16,15 @@ class UserModel {
         $user = new User($results[0]);
         return $user;
     }
+
+    static public function deleteUser(int $user_id) {
+        $sql = "DELETE FROM tblUsers WHERE user_id = ?";
+        Database::executeSql($sql, "i", array($user_id));
+        return !isset(Database::$lastError);
+    }
+    static public function editUser(User $user) {
+        $sql = "UPDATE tblUsers SET username = ?, password = ? WHERE user_id = ?";
+        Database::executeSql($sql, "ssi", array($user->username, $user->password, $user->user_id));
+        return !isset(Database::$lastError);
+    }
 }
