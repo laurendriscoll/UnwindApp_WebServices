@@ -9,6 +9,7 @@ require_once(__DIR__ . "/../lib/Security.php");
 class UsersController {
     static public function post(Request $request) : Response {
         $user = new User($request->data);
+        $user->password = getHashedPassword($user->password);
         $response = new Response();
 
         if (UserModel::createUser($user)) {

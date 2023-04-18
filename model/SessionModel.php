@@ -8,9 +8,9 @@ class SessionModel {
     Database::executeSql($sql, "siissii", array($session->session_date, $session->pre_mood_index, $session->post_mood_index, $session->pre_med_notes, $session->post_med_notes, $session->session_length, $session->user_id));
     return !isset(Database::$lastError);
   }
-  public static function getSessions(int $user_id) : array {
-      $sql = "SELECT * FROM tblSessions WHERE user_id = ?";
-      $results = Database::executeSql($sql, "i", array($user_id));
+  public static function getSessions(string $username) : array {
+      $sql = "SELECT * FROM tblSessions S, tblUsers U WHERE U.user_id = S.user_id AND U.username = ?";
+      $results = Database::executeSql($sql, "i", array($username));
       $sessions = array();
       foreach ($results as $result) {
           array_push($sessions, new Session($result));
